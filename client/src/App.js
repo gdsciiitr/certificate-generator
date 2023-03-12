@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { Routes, Route, useLocation } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Generate from "./CertificatePages/Generate";
+import Home from "./Pages/Home";
+import Certificates from "./Pages/Certificates";
+import Err from "./Pages/Err";
+import Output from "./Pages/Output";
+// import { saveAs } from "file-saver";
 function App() {
+  const location = useLocation();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="overflow-hidden">
+      <Navbar />
+      <Routes location={location} key={location.key}>
+        <Route path="/" element={<Home />} />
+        <Route path="/cert1" element={<Generate />} />
+        <Route path="/output" element={<Output />} />
+        <Route path="/certificates" element={<Certificates />} />
+        <Route path="*" element={<Err />} />
+      </Routes>
+      <Footer />
     </div>
   );
 }
